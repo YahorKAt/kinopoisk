@@ -1,0 +1,6 @@
+export {MainPage} from '@/pages/MainPage/MainPage'
+export {PageNotFound} from './PageNotFound/PageNotFound'
+export {CategoryPage} from './CategoryPage/CategoryPage'
+export {FilterPage} from './FilterPage/FilterPage'
+export {SearchPage} from './SearchPage/SearchPage'
+export {FavoritesPage} from './FavoritesPage/FavoritesPage'
