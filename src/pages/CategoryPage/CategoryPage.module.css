@@ -1,0 +1,26 @@
+.categoryPage {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-block: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.moviesSection {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-body-text);
+}
+

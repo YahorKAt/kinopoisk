@@ -1,0 +1,30 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-block: 32px;
+}
+
+.content{
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-body-text);
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 16px;
+    color: var(--color-gray-500);
+}

@@ -1,2 +1,5 @@
-export {SunIcon} from './SunIcon/SunIcon'
-export {MoonIcon} from './MoonIcon/MoonIcon'
+export { SunIcon } from "./SunIcon/SunIcon"
+export { MoonIcon } from "./MoonIcon/MoonIcon"
+export { LikeIcon } from "@/common/components/Icons/LikeIcon/LikeIcon"
+export { ArrowRightIcon } from "@/common/components/Icons/ArrowRightIcon/ArrowRightIcon"
+export { ArrowLeftIcon } from "@/common/components/Icons/ArrowLeftIcon/ArrowLeftIcon"

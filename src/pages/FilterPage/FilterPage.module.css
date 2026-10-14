@@ -1,0 +1,17 @@
+.filterPage{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-block: 24px;
+}
+
+.content{
+    display: flex;
+    gap: 24px;
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

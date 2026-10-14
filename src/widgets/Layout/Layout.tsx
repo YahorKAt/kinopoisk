@@ -8,8 +8,12 @@ export const Layout = () => {
         <div className={s.layoutContainer}> {/* Здесь ты делаешь min-h-screen и flex-col */}
             <Header/>
             <main className={s.mainContent}>
-                {/* Outlet рендерит дочерний маршрут (например, MainPage) именно здесь */}
-                <Outlet/>
+                <div className={s.wrapper}>
+                    <div className={s.container}>
+                        {/* Outlet рендерит дочерний маршрут (например, MainPage) именно здесь */}
+                        <Outlet/>
+                    </div>
+                </div>
             </main>
             <Footer/>
         </div>

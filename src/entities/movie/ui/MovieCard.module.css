@@ -1,0 +1,118 @@
+.cardMovie {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.poster {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3; /* Стандартное соотношение для постеров фильмов */
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--color-gray-100);
+}
+
+.posterLink {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.posterImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-500);
+    font-size: 20px;
+}
+
+/* Эффект при наведении на постер */
+.posterLink:hover .posterImage {
+    transform: scale(1.05);
+}
+
+/* Круглый бейдж рейтинга в правом нижнем углу */
+.rating {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--color-white);
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Кнопка "лайк" в правом верхнем углу */
+.favoriteButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--color-white);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+
+.favoriteButton:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+}
+
+.favoriteButton.active {
+    color: var(--color-red-600);
+}
+
+.favoriteButton svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Название фильма */
+.cardTitleLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.cardTitle {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-body-text);
+    line-height: 1.3;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    transition: color 0.2s;
+}
+
+.cardTitleLink:hover .cardTitle {
+    color: var(--color-indigo-400);
+}

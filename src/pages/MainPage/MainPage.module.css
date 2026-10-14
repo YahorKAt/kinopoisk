@@ -1,0 +1,14 @@
+.mainPage {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    padding-bottom: 64px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+}
+
+

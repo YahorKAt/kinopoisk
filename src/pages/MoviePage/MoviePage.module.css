@@ -1,0 +1,269 @@
+.moviePage {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding-block: 24px;
+}
+
+.loading,
+.error {
+    text-align: center;
+    padding: 80px 24px;
+    font-size: 18px;
+    color: var(--color-gray-500);
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-body-text);
+    text-decoration: none;
+    border: 1px solid var(--color-control-border);
+    border-radius: 999px;
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.backButton:hover {
+    background-color: var(--color-gray-200);
+    border-color: var(--color-indigo-400);
+    transform: translateY(-1px);
+}
+
+.backButton:active {
+    transform: translateY(0);
+}
+
+
+/* Верхняя секция */
+.topSection {
+    display: flex;
+    gap: 40px;
+
+}
+
+.posterContainer {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 320px;
+}
+
+.poster {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgb(var(--color-gray-900-rgb) / .1);
+    object-fit: cover;
+}
+
+.posterPlaceholder {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-500);
+    border-radius: 12px;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.movieInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.topBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.metaBlock {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 16px;
+    color: var(--color-gray-600);
+}
+
+.title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-gray-900);
+    line-height: 1.1;
+}
+
+.metaItem {
+    font-size: 14px;
+    color: var(--color-gray-400);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--color-white);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.overview {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-gray-700);
+}
+
+/* Жанры */
+.genresSection {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sectionTitle {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-body-text);
+}
+
+.genresList {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.genreTag {
+    padding: 6px 12px;
+    font-size: 14px;
+    color: var(--color-gray-800);
+    background-color: var(--color-gray-200);
+    border-radius: 999px;
+}
+
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.castGrid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.castCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.castPhoto {
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: var(--color-gray-200);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.castPhoto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.castPlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--color-gray-500);
+}
+
+.castInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.castName {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-body-text);
+}
+
+.castCharacter {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-gray-500);
+}
+
+/* Похожие фильмы */
+.similarSection {
+    margin-bottom: 48px;
+}
+
+.similarGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .topSection {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .posterContainer {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .castGrid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 16px;
+    }
+
+    .castPhoto {
+        width: 100px;
+        height: 100px;
+    }
+}
