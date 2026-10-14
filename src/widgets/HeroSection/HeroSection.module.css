@@ -52,3 +52,53 @@
     font-weight: 600;
     color: var(--color-white);
 }
+
+
+/* =========================================
+   SKELETON LOADING STYLES
+   ========================================= */
+
+.skeleton {
+    background: linear-gradient(
+            90deg,
+            var(--color-gray-800, #2d3748) 25%,
+            var(--color-gray-700, #4a5568) 50%,
+            var(--color-gray-800, #2d3748) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite linear;
+    border-radius: 8px;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* 1. Скелетон заголовка (имитирует h1 "Welcome") */
+.skeletonTitle {
+    width: 30%;
+    min-width: 200px;
+    height: 52px;
+    border-radius: 12px;
+}
+
+/* 2. Скелетон подзаголовка (имитирует h2) */
+.skeletonSubtitle {
+    width: 35%;
+    min-width: 300px;
+    height: 36px;
+    border-radius: 12px;
+}
+
+/* 3. Скелетон поиска (имитирует инпут с закругленными краями) */
+.skeletonSearch {
+    width: 50%;
+    max-width: 600px;
+    height: 44px;
+    border-radius: 12px;
+}

@@ -116,3 +116,66 @@
 .cardTitleLink:hover .cardTitle {
     color: var(--color-indigo-400);
 }
+
+
+/* =========================================
+   SKELETON LOADING STYLES
+   ========================================= */
+
+/* Базовый класс для анимации мерцания */
+.skeleton {
+    background: linear-gradient(
+            90deg,
+            var(--color-gray-800, #2d3748) 25%,
+            var(--color-gray-700, #4a5568) 50%,
+            var(--color-gray-800, #2d3748) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite linear;
+    border-radius: 4px;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* 1. Скелетон постера (сохраняем пропорции 2:3 как у реального постера) */
+.skeletonPoster {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: 8px; /* Подстрой под свой border-radius постера, если он другой */
+}
+
+/* 2. Скелетон рейтинга (совпадает с размерами и позицией .rating) */
+.skeletonRating {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* 3. Скелетон кнопки лайка (совпадает с размерами и позицией .favoriteButton) */
+.skeletonFavorite {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+/* 4. Скелетон названия фильма */
+.skeletonTitle {
+    width: 85%; /* Название редко занимает всю ширину */
+    height: 20px;
+    margin-top: 12px;
+    margin-bottom: 0; /* Убираем стандартный margin у h3 */
+    border-radius: 4px;
+}

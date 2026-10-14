@@ -4,6 +4,13 @@
     background-color: var(--color-gray-200);
     overflow: hidden;
     position: relative;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .bar {
@@ -11,10 +18,9 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 40%; /* Ширина бегунка меньше 100%, чтобы он мог "проехать" */
-    background-color: var(--color-body-text); /* Цвет загрузки */
+    width: 40%;
+    background-color: var(--color-body-text);
     border-radius: 2px;
-    /* Плавная анимация движения слева направо */
     animation: slide 1.5s infinite ease-in-out;
 }
 
@@ -23,6 +29,6 @@
         transform: translateX(-100%);
     }
     100% {
-        transform: translateX(350%); /* Проезжает через весь контейнер */
+        transform: translateX(350%);
     }
 }

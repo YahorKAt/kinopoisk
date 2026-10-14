@@ -1,5 +1,11 @@
 import { baseApi } from "@/app/api/baseApi"
-import type { CreditsResponse, GetMoviesArgs, MovieDetails, MoviesResponse } from "@/entities/movie/api/moviesApi.types"
+import type {
+    CreditsResponse,
+    GenreListResponse,
+    GetMoviesArgs,
+    MovieDetails,
+    MoviesResponse,
+} from "@/entities/movie/api/moviesApi.types"
 
 export const moviesApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -42,6 +48,16 @@ export const moviesApi = baseApi.injectEndpoints({
             }),
             providesTags: (_result, _error, { movie_id }) => [{ type: "Similar", movie_id }],
         }),
+
+        getGenreList: build.query<GenreListResponse, { language?: string }>({
+            query: ({ language = "en-US" }) => ({
+                url: "/genre/movie/list",
+                params: {
+                    language,
+                },
+            }),
+            providesTags: ["Genres"],
+        }),
     }),
 })
 
@@ -50,4 +66,5 @@ export const {
     useGetMovieDetailsQuery,
     useGetSimilarMoviesQuery,
     useGetMovieCreditsQuery,
+    useGetGenreListQuery
 } = moviesApi

@@ -22,6 +22,7 @@ const navItems: NavItem[] = [
 
 export const Header = () => {
     const status = useAppSelector(selectStatus)
+    const isLoading = status === "loading"
 
     return (
         <>
@@ -45,7 +46,7 @@ export const Header = () => {
                     <ThemeToggler />
                 </div>
             </header>
-            {status === "loading" && <LinearProgress />}
+            <LinearProgress isLoading={isLoading} />
         </>
     )
 }

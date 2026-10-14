@@ -1,4 +1,6 @@
 // Типы ответов от TMDB
+import { type CategoryType } from "@/common/enums"
+
 export interface Movie {
     adult: boolean
     backdrop_path: string | null
@@ -102,11 +104,19 @@ export interface MoviesResponse {
     total_results: number
 }
 
-export type Category =  "popular" | "top_rated" | "upcoming" | "now_playing"
 // Тип аргументов запроса
 export type GetMoviesArgs = {
-    category: Category
+    category: CategoryType
     language?: string
     page?: number
     region?: string
+}
+
+export interface Genre {
+    id: number
+    name: string
+}
+
+export type GenreListResponse = {
+    genres: Genre[]
 }

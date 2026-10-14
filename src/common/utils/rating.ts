@@ -5,7 +5,7 @@ export type RatingColor = 'red' | 'yellow' | 'green';
  * @param rating - значение рейтинга от 0 до 10
  * @returns цвет: 'red' (0-3), 'yellow' (3.1-7), 'green' (7+)
  */
-export const getRatingColor = (rating: number): RatingColor => {
+ const getRatingColor = (rating: number): RatingColor => {
     if (rating <= 3) return 'red';
     if (rating <= 7) return 'yellow';
     return 'green';

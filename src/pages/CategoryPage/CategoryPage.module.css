@@ -24,3 +24,13 @@
     color: var(--color-body-text);
 }
 
+.moviesListTitle {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+}

@@ -1,36 +1,23 @@
-import {NavLink} from 'react-router-dom';
-import {Path} from '@/common/routing/paths';
-import s from './CategoryTabs.module.css';
-
-type Category = 'popular' | 'top_rated' | 'upcoming' | 'now_playing';
-
-type Tab = {
-    id: Category;
-    label: string;
-};
-
-const tabs: Tab[] = [
-    {id: 'popular', label: 'Popular Movies'},
-    {id: 'top_rated', label: 'Top Rated Movies'},
-    {id: 'upcoming', label: 'Upcoming Movies'},
-    {id: 'now_playing', label: 'Now Playing Movies'},
-];
-
+import { categoryLabels } from "@/common/constants"
+import { Category } from "@/common/enums"
+import { NavLink } from "react-router-dom"
+import { Path } from "@/common/routing/paths"
+import s from "./CategoryTabs.module.css"
 
 export const CategoryTabs = () => {
     return (
         <div className={s.categoryNav}>
             <div className={s.tabsContainer}>
-                {tabs.map((tab) => (
+                {Object.values(Category).map((category) => (
                     <NavLink
-                        key={tab.id}
-                        to={`${Path.Category}/${tab.id}`}
-                        className={({isActive}) => `${s.tab} ${isActive ? s.active : ''}`}
+                        key={category}
+                        to={`${Path.Category}/${category}`}
+                        className={({ isActive }) => `${s.category} ${isActive ? s.active : ""}`}
                     >
-                        {tab.label}
+                        {categoryLabels[category]}
                     </NavLink>
                 ))}
             </div>
         </div>
-    );
-};
+    )
+}

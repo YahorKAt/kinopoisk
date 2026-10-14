@@ -10,7 +10,7 @@
     flex-wrap: wrap;
 }
 
-.tab {
+.category {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -25,18 +25,18 @@
     transition: all 0.2s ease-in-out;
 }
 
-.tab:hover {
+.category:hover {
     background-color: var(--color-gray-200);
     border-color: var(--color-indigo-400);
     transform: translateY(-1px);
 }
 
-.tab.active {
+.category.active {
     color: var(--color-white);
     background-color: var(--color-blue-600);
     border-color: var(--color-blue-600);
 }
 
-.tab.active:hover {
+.category.active:hover {
     background-color: var(--color-blue-700);
 }

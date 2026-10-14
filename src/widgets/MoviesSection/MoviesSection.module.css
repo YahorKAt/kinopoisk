@@ -10,6 +10,12 @@
     justify-content: space-between;
 }
 
+.grid{
+    display: grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap: 24px;
+}
+
 .moviesListTitle {
     font-size: 24px;
     font-weight: 600;

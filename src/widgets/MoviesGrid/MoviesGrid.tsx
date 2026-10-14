@@ -1,5 +1,5 @@
 import type {Movie} from "@/entities/movie/api/moviesApi.types";
-import {MovieCard} from "@/entities/movie/ui/MovieCard";
+import { MovieCard } from "@/entities/movie/ui"
 
 import s from './MoviesGrid.module.css'
 

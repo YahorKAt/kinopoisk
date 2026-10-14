@@ -1,6 +1,6 @@
 import {useAppSelector} from "@/common/hooks";
 import {selectAllFavorites} from "@/entities/movie/model/movieSlice";
-import {MovieCard} from "@/entities/movie/ui/MovieCard";
+import { MovieCard } from "@/entities/movie/ui"
 import s from './FavoritesPage.module.css'
 
 export const FavoritesPage = () => {

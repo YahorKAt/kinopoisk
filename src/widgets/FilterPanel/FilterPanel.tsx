@@ -1,80 +1,47 @@
-import {useState} from 'react';
-import s from './FilterPanel.module.css';
-
-type Genre = {
-    id: number;
-    name: string;
-};
-
-const genres: Genre[] = [
-    {id: 28, name: 'Action'},
-    {id: 12, name: 'Adventure'},
-    {id: 16, name: 'Animation'},
-    {id: 35, name: 'Comedy'},
-    {id: 80, name: 'Crime'},
-    {id: 99, name: 'Documentary'},
-    {id: 18, name: 'Drama'},
-    {id: 10751, name: 'Family'},
-    {id: 14, name: 'Fantasy'},
-    {id: 36, name: 'History'},
-    {id: 27, name: 'Horror'},
-    {id: 10402, name: 'Music'},
-    {id: 9648, name: 'Mystery'},
-    {id: 10749, name: 'Romance'},
-    {id: 878, name: 'Science Fiction'},
-    {id: 10770, name: 'TV Movie'},
-    {id: 53, name: 'Thriller'},
-    {id: 10752, name: 'War'},
-    {id: 37, name: 'Western'},
-];
+import { useGetGenreListQuery } from "@/entities/movie/api/moviesApi"
+import { useState } from "react"
+import s from "./FilterPanel.module.css"
 
 type SortOption = {
-    value: string;
-    label: string;
-};
+    value: string
+    label: string
+}
 
 const sortOptions: SortOption[] = [
-    {value: 'popularity.desc', label: 'Popularity ↓'},
-    {value: 'popularity.asc', label: 'Popularity ↑'},
-    {value: 'vote_average.desc', label: 'Rating ↓'},
-    {value: 'vote_average.asc', label: 'Rating ↑'},
-    {value: 'primary_release_date.desc', label: 'Release Date ↓'},
-    {value: 'primary_release_date.asc', label: 'Release Date ↑'},
-];
+    { value: "popularity.desc", label: "Popularity ↓" },
+    { value: "popularity.asc", label: "Popularity ↑" },
+    { value: "vote_average.desc", label: "Rating ↓" },
+    { value: "vote_average.asc", label: "Rating ↑" },
+    { value: "primary_release_date.desc", label: "Release Date ↓" },
+    { value: "primary_release_date.asc", label: "Release Date ↑" },
+]
 
 type Props = {
-    onFilterChange?: (filters: {
-        sortBy: string;
-        ratingRange: [number, number];
-        selectedGenres: number[];
-    }) => void;
-};
+    onFilterChange?: (filters: { sortBy: string; ratingRange: [number, number]; selectedGenres: number[] }) => void
+}
 
-export const FilterPanel = ({onFilterChange}: Props) => {
-    const [sortBy, setSortBy] = useState('popularity.desc');
-    const [ratingMin, setRatingMin] = useState(0);
-    const [ratingMax, setRatingMax] = useState(10);
-    const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+export const FilterPanel = ({ onFilterChange }: Props) => {
+    const { data } = useGetGenreListQuery({})
+    const [sortBy, setSortBy] = useState("popularity.desc")
+    const [ratingMin, setRatingMin] = useState(0)
+    const [ratingMax, setRatingMax] = useState(10)
+    const [selectedGenres, setSelectedGenres] = useState<number[]>([])
 
     const handleGenreToggle = (genreId: number) => {
-        setSelectedGenres((prev) =>
-            prev.includes(genreId)
-                ? prev.filter((id) => id !== genreId)
-                : [...prev, genreId]
-        );
-    };
+        setSelectedGenres((prev) => (prev.includes(genreId) ? prev.filter((id) => id !== genreId) : [...prev, genreId]))
+    }
 
     const handleReset = () => {
-        setSortBy('popularity.desc');
-        setRatingMin(0);
-        setRatingMax(10);
-        setSelectedGenres([]);
+        setSortBy("popularity.desc")
+        setRatingMin(0)
+        setRatingMax(10)
+        setSelectedGenres([])
         onFilterChange?.({
-            sortBy: 'popularity.desc',
+            sortBy: "popularity.desc",
             ratingRange: [0, 10],
             selectedGenres: [],
-        });
-    };
+        })
+    }
 
     return (
         <aside className={s.filterPanel}>
@@ -132,12 +99,10 @@ export const FilterPanel = ({onFilterChange}: Props) => {
             {/* Genres */}
             <div>
                 <div className={s.genresGrid}>
-                    {genres.map((genre) => (
+                    {data?.genres.map((genre) => (
                         <button
                             key={genre.id}
-                            className={`${s.genreButton} ${
-                                selectedGenres.includes(genre.id) ? s.active : ''
-                            }`}
+                            className={`${s.genreButton} ${selectedGenres.includes(genre.id) ? s.active : ""}`}
                             onClick={() => handleGenreToggle(genre.id)}
                         >
                             {genre.name}
@@ -151,5 +116,5 @@ export const FilterPanel = ({onFilterChange}: Props) => {
                 Reset filters
             </button>
         </aside>
-    );
-};
+    )
+}

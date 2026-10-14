@@ -1,79 +1,79 @@
-import {Path} from "@/common/routing/paths";
-import {useGetMoviesByCategoryQuery} from "@/entities/movie/api/moviesApi";
-import {CategoryTabs, MoviesGrid, Pagination} from "@/widgets";
-import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import s from './CategoryPage.module.css'
-
-
-const VALID_CATEGORIES = ['popular', 'top_rated', 'upcoming', 'now_playing'] as const;
-type Category = typeof VALID_CATEGORIES[number];
-
-const categoryTitles: Record<Category, string> = {
-    popular: 'Popular Movies',
-    top_rated: 'Top Rated Movies',
-    upcoming: 'Upcoming Movies',
-    now_playing: 'Now Playing Movies',
-};
+import { categoryLabels } from "@/common/constants"
+import { Path } from "@/common/routing/paths"
+import { useGetMoviesByCategoryQuery } from "@/entities/movie/api/moviesApi"
+import { MovieCardSkeleton } from "@/entities/movie/ui"
+import { CategoryTabs, MoviesGrid, Pagination } from "@/widgets"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { Category, type CategoryType } from "@/common/enums"
+import { isValidCategoryType } from "@/common/utils"
+import s from "./CategoryPage.module.css"
 
 export const CategoryPage = () => {
-    const {category} = useParams<{ category: string }>();
-    const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState(1);
-    const moviesPerPage = 20;
-    const totalPages = 5;
-    const startIndex = (currentPage - 1) * moviesPerPage;
+    const { category } = useParams<{ category: string }>()
+    const navigate = useNavigate()
 
-    const currentCategory: Category = VALID_CATEGORIES.includes(category as Category)
-        ? (category as Category)
-        : 'popular';
+    const isValidCategory = isValidCategoryType(category)
+    const currentCategory: CategoryType = isValidCategory ? category : Category.popular
 
-    const {data, isLoading, error} = useGetMoviesByCategoryQuery({
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const { data, isLoading } = useGetMoviesByCategoryQuery({
         category: currentCategory,
-        page: currentPage
-    });
-
-    const paginatedMovies = data?.results.slice(startIndex, startIndex + moviesPerPage);
+        page: currentPage,
+    })
 
     useEffect(() => {
-        if (category && !VALID_CATEGORIES.includes(category as Category)) {
-            navigate(`${Path.Category}/popular`, {replace: true});
+        setCurrentPage(1)
+    }, [currentCategory])
+
+    useEffect(() => {
+        if (category && !isValidCategory) {
+            navigate(`${Path.Category}/${Category.popular}`, { replace: true })
         }
-    }, [category, navigate]);
-
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [currentCategory]);
-
-    if (isLoading) return <div className={s.loading}>Loading...</div>;
-    if (error) return <div className={s.error}>Error loading movies</div>;
-
+    }, [category, navigate, isValidCategory])
 
     const handlePageChange = (page: number) => {
-        setCurrentPage(page);
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    };
+        setCurrentPage(page)
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
 
+    if (isLoading) {
+        return (
+            <section className={s.categoryPage}>
+                <CategoryTabs />
+                <section className={s.moviesSection}>
+                    <h2 className={s.title}>{categoryLabels[currentCategory]}</h2>
+                    <div className={s.grid}>
+                        {Array.from({ length: 15 }).map((_, index) => (
+                            <MovieCardSkeleton key={index} />
+                        ))}
+                    </div>
+                </section>
+            </section>
+        )
+    }
 
     return (
         <section className={s.categoryPage}>
-            <CategoryTabs/>
+            <CategoryTabs />
             <section className={s.moviesSection}>
-                <h2 className={s.title}>{categoryTitles[currentCategory]}</h2>
+                <h2 className={s.title}>{categoryLabels[currentCategory]}</h2>
 
-                {paginatedMovies
-                    ? <MoviesGrid movies={paginatedMovies}/>
-                    : 'No movies found'
-                }
+                {data?.results && data.results.length > 0 ? (
+                    <MoviesGrid movies={data.results} />
+                ) : (
+                    <div>No movies found</div>
+                )}
 
-
-                {data && data.total_pages > 1 &&
-                    <Pagination currentPage={currentPage}
-                                totalPages={totalPages}
-                                onPageChange={handlePageChange}
+                {data && data.total_pages > 1 && (
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={data.total_pages}
+                        onPageChange={handlePageChange}
                     />
-                }
+                )}
             </section>
         </section>
-    );
-};
+    )
+}
