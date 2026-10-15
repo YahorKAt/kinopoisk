@@ -6,10 +6,19 @@
 }
 
 .content {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
     gap: 24px;
 }
 
+.filterColumn {
+    grid-column: 1;
+}
+
+.moviesColumn {
+    grid-column: 2;
+    min-width: 0;
+}
 
 .body {
     display: flex;
@@ -20,13 +29,13 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0px, 1fr));
     gap: 24px;
     width: 100%;
 }
 
 .wrapper {
     display: flex;
-    width: 100%;
-    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
 }

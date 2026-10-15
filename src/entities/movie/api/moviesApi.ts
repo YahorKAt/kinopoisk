@@ -2,6 +2,7 @@ import { baseApi } from "@/app/api/baseApi"
 import type {
     CreditsResponse,
     GenreListResponse,
+    GetFilteredMoviesArgs,
     GetMoviesArgs,
     MovieDetails,
     MoviesResponse,
@@ -58,6 +59,23 @@ export const moviesApi = baseApi.injectEndpoints({
             }),
             providesTags: ["Genres"],
         }),
+
+        getFilteredMovies: build.query<MoviesResponse, GetFilteredMoviesArgs>({
+            query: (args) => ({
+                url: "/discover/movie",
+                params: {
+                    page: args.page ?? 1,
+                    language: args.language ?? "en-US",
+                    sort_by: args.sort_by,
+                    with_genres: args.with_genres,
+                    primary_release_year: args.primary_release_year,
+                    "vote_average.gte": args["vote_average.gte"],
+                    "vote_average.lte": args["vote_average.lte"],
+                    region: args.region,
+                },
+            }),
+            providesTags: ["Movies"],
+        }),
     }),
 })
 
@@ -66,5 +84,6 @@ export const {
     useGetMovieDetailsQuery,
     useGetSimilarMoviesQuery,
     useGetMovieCreditsQuery,
-    useGetGenreListQuery
+    useGetGenreListQuery,
+    useGetFilteredMoviesQuery
 } = moviesApi

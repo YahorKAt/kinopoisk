@@ -120,3 +120,16 @@ export interface Genre {
 export type GenreListResponse = {
     genres: Genre[]
 }
+
+
+
+export type GetFilteredMoviesArgs = {
+    page?: number
+    language?: string
+    sort_by?: string // например: 'popularity.desc', 'vote_average.desc', 'primary_release_date.desc'
+    with_genres?: string // строка с ID жанров через запятую, например: '28,12' (Action, Adventure)
+    primary_release_year?: number // например: 2023
+    "vote_average.gte"?: number // минимальный рейтинг (gte = greater than or equal)
+    "vote_average.lte"?: number // максимальный рейтинг (lte = less than or equal)
+    region?: string // например: 'US', 'RU'
+}

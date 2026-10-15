@@ -1,44 +1,57 @@
 .container {
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin: 0 auto;
+    margin-top: 50px;
 }
 
 .pagination {
     display: flex;
-    gap: 8px;
-    justify-content: center;
+    gap: 10px;
 }
-.button {
-    padding: 4px 10px;
+
+.pageButton {
     min-width: 36px;
     height: 36px;
-    border-radius: 6px;
-    border: 1px solid var(--color-control-border);
     background-color: transparent;
     color: var(--color-control-text);
-    line-height: 1;
-    font-size: 14px;
-    font-weight: 600;
+    border: 1px solid var(--color-control-border);
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s ease;
     font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
 }
 
-
-.button:hover:not(:disabled) {
+.pageButton:hover:not(:disabled) {
     color: var(--color-white);
     background-color: var(--color-gray-200);
     border-color: var(--color-indigo-400);
 }
 
-.button:disabled {
+.pageButtonActive {
+    background-color: var(--color-blue-600);
+    border-color: var(--color-blue-600);
+    color: var(--color-white);
+}
+
+.pageButton:disabled {
     opacity: 0.4;
     cursor: not-allowed;
 }
 
-.button.active {
-    color: var(--color-white);
-    background-color: var(--color-blue-600);
-    border-color: var(--color-blue-600);
+.ellipsis {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-control-text);
+    font-weight: 600;
+    font-size: 14px;
 }

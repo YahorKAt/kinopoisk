@@ -2,11 +2,9 @@
     background-color: var(--color-gray-100);
     border-radius: 12px;
     padding: 24px;
-    width: 280px;
-    flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 36px;
 }
 
 .title {
@@ -56,7 +54,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
 }
 
 .ratingValue {
@@ -64,12 +62,6 @@
     color: var(--color-body-text);
 }
 
-.sliderContainer {
-    position: relative;
-    height: 24px;
-    display: flex;
-    align-items: center;
-}
 
 .slider {
     position: absolute;

@@ -1,5 +1,6 @@
+import { RangeSlider } from "@/common/components/RangeSlider/RangeSlider"
 import { useGetGenreListQuery } from "@/entities/movie/api/moviesApi"
-import { useState } from "react"
+import { useCallback } from "react"
 import s from "./FilterPanel.module.css"
 
 type SortOption = {
@@ -14,34 +15,48 @@ const sortOptions: SortOption[] = [
     { value: "vote_average.asc", label: "Rating ↑" },
     { value: "primary_release_date.desc", label: "Release Date ↓" },
     { value: "primary_release_date.asc", label: "Release Date ↑" },
+    { value: "original_title.asc", label: "Title A-Z" },
+    { value: "original_title.desc", label: "Title Z-A" },
 ]
 
-type Props = {
-    onFilterChange?: (filters: { sortBy: string; ratingRange: [number, number]; selectedGenres: number[] }) => void
+type FilterState = {
+    sortBy: string
+    ratingMin: number
+    ratingMax: number
+    selectedGenres: number[]
 }
 
-export const FilterPanel = ({ onFilterChange }: Props) => {
+type Props = {
+    filters: FilterState
+    onFilterChange: (newFilters: FilterState) => void
+}
+
+export const FilterPanel = ({ filters, onFilterChange }: Props) => {
     const { data } = useGetGenreListQuery({})
-    const [sortBy, setSortBy] = useState("popularity.desc")
-    const [ratingMin, setRatingMin] = useState(0)
-    const [ratingMax, setRatingMax] = useState(10)
-    const [selectedGenres, setSelectedGenres] = useState<number[]>([])
 
     const handleGenreToggle = (genreId: number) => {
-        setSelectedGenres((prev) => (prev.includes(genreId) ? prev.filter((id) => id !== genreId) : [...prev, genreId]))
+        const newGenres = filters.selectedGenres.includes(genreId)
+            ? filters.selectedGenres.filter((id) => id !== genreId)
+            : [...filters.selectedGenres, genreId]
+
+        onFilterChange({ ...filters, selectedGenres: newGenres })
     }
 
     const handleReset = () => {
-        setSortBy("popularity.desc")
-        setRatingMin(0)
-        setRatingMax(10)
-        setSelectedGenres([])
-        onFilterChange?.({
+        onFilterChange({
             sortBy: "popularity.desc",
-            ratingRange: [0, 10],
+            ratingMin: 0,
+            ratingMax: 10,
             selectedGenres: [],
         })
     }
+
+    const handleRatingChange = useCallback(
+        (newValues: { ratingMin: number; ratingMax: number }) => {
+            onFilterChange({ ...filters, ratingMax: newValues.ratingMax, ratingMin: newValues.ratingMin })
+        },
+        [filters, onFilterChange],
+    )
 
     return (
         <aside className={s.filterPanel}>
@@ -55,8 +70,8 @@ export const FilterPanel = ({ onFilterChange }: Props) => {
                 <select
                     id="sort-select"
                     className={s.select}
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
+                    value={filters.sortBy}
+                    onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
                 >
                     {sortOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -71,44 +86,27 @@ export const FilterPanel = ({ onFilterChange }: Props) => {
                 <div className={s.ratingHeader}>
                     <span className={s.label}>Rating</span>
                     <span className={s.ratingValue}>
-                        {ratingMin.toFixed(1)} - {ratingMax.toFixed(1)}
+                        {filters.ratingMin.toFixed(1)} - {filters.ratingMax.toFixed(1)}
                     </span>
                 </div>
-                <div className={s.sliderContainer}>
-                    <input
-                        type="range"
-                        min="0"
-                        max="10"
-                        step="0.1"
-                        value={ratingMin}
-                        onChange={(e) => setRatingMin(Number(e.target.value))}
-                        className={s.slider}
-                    />
-                    <input
-                        type="range"
-                        min="0"
-                        max="10"
-                        step="0.1"
-                        value={ratingMax}
-                        onChange={(e) => setRatingMax(Number(e.target.value))}
-                        className={s.slider}
-                    />
-                </div>
+                <RangeSlider
+                    ratingMin={filters.ratingMin}
+                    ratingMax={filters.ratingMax}
+                    onFilterChange={handleRatingChange}
+                />
             </div>
 
             {/* Genres */}
-            <div>
-                <div className={s.genresGrid}>
-                    {data?.genres.map((genre) => (
-                        <button
-                            key={genre.id}
-                            className={`${s.genreButton} ${selectedGenres.includes(genre.id) ? s.active : ""}`}
-                            onClick={() => handleGenreToggle(genre.id)}
-                        >
-                            {genre.name}
-                        </button>
-                    ))}
-                </div>
+            <div className={s.genresGrid}>
+                {data?.genres.map((genre) => (
+                    <button
+                        key={genre.id}
+                        className={`${s.genreButton} ${filters.selectedGenres.includes(genre.id) ? s.active : ""}`}
+                        onClick={() => handleGenreToggle(genre.id)}
+                    >
+                        {genre.name}
+                    </button>
+                ))}
             </div>
 
             {/* Reset button */}
