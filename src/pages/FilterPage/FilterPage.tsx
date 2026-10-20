@@ -29,8 +29,8 @@ export const FilterPage = () => {
         [searchParams],
     )
 
-    const debouncedRatingMin = Number(useDebounceValue(filters.ratingMin, 700))
-    const debouncedRatingMax = Number(useDebounceValue(filters.ratingMax, 700))
+    const debouncedRatingMin = Number(useDebounceValue(filters.ratingMin))
+    const debouncedRatingMax = Number(useDebounceValue(filters.ratingMax))
 
     const currentPage = Number(searchParams.get("page")) || 1
 
@@ -64,7 +64,6 @@ export const FilterPage = () => {
         })
         window.scrollTo({ top: 0, behavior: "smooth" })
     }
-
 
     return (
         <section className={s.filterPage}>

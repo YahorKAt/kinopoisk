@@ -9,27 +9,18 @@
 :root {
     color-scheme: light;
     --color-white: #ffffff;
-    --color-white-rgb: 255 255 255;
-    --color-neutral-850: #242424;
-    --color-neutral-900: #1a1a1a;
-    --color-background-light: #f9f9f9;
-    --color-indigo-300: #747bff;
     --color-indigo-400: #646cff;
     --color-indigo-500: #535bf2;
     --color-blue-600: #2563eb;
     --color-blue-700: #1d4ed8;
-    --color-blue-600-rgb: 37 99 235;
     --color-green-600: #16a34a;
     --color-yellow-400: #facc15;
     --color-red-600: #dc2626;
     --color-gray-50: #f9fafb;
     --color-gray-100: #f3f4f6;
-    --color-gray-150: #ececec;
     --color-gray-200: #e5e7eb;
     --color-gray-300: #d1d5db;
-    --color-gray-350: #aaaaaa;
     --color-gray-400: #9ca3af;
-    --color-gray-450: #888888;
     --color-gray-500: #6b7280;
     --color-gray-600: #4b5563;
     --color-gray-700: #374151;
@@ -41,16 +32,21 @@
     --color-control-background: #f9f9f9;
     --color-control-text: #111827;
     --color-control-border: #d1d5db;
+
+    --glass-blur: blur(20px) saturate(180%); /* Сильное размытие + сочность */
+    --glass-radius: 24px; /* Скругление для "жидкости" */
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); /* Мягкая тень для объема */
+
+    --glass-bg: rgba(255, 255, 255, 0.65); /* Плотный белый, просвечивает фон */
+    --glass-border: rgba(255, 255, 255, 0.8); /* Почти белый кант */
+    --glass-highlight: rgba(255, 255, 255, 1); /* Яркий блик сверху */
+    --glass-text: #1f2937; /* Темный текст для контраста */
+    --glass-input-bg: rgba(0, 0, 0, 0.05);
 }
 
 :root[data-theme="dark"] {
     color-scheme: dark;
     --color-white: #f8fafc;
-    --color-white-rgb: 248 250 252;
-    --color-neutral-850: #0b1120;
-    --color-neutral-900: #111827;
-    --color-background-light: #1e293b;
-    --color-indigo-300: #818cf8;
     --color-indigo-400: #6366f1;
     --color-indigo-500: #4f46e5;
     --color-green-600: #22c55e;
@@ -58,12 +54,9 @@
     --color-red-600: #ef4444;
     --color-gray-50: #0f172a;
     --color-gray-100: #141c2c;
-    --color-gray-150: #1a2334;
     --color-gray-200: #1f2b40;
     --color-gray-300: #27354f;
-    --color-gray-350: #324061;
     --color-gray-400: #3d4b72;
-    --color-gray-450: #516081;
     --color-gray-500: #64748b;
     --color-gray-600: #94a3b8;
     --color-gray-700: #cbd5f5;
@@ -75,8 +68,13 @@
     --color-control-background: #1f2b40;
     --color-control-text: #f8fafc;
     --color-control-border: #324061;
-}
 
+    --glass-bg: rgba(15, 23, 42, 0.6); /* Темно-синий/серый, полупрозрачный */
+    --glass-border: rgba(255, 255, 255, 0.1); /* Тонкая белая обводка */
+    --glass-highlight: rgba(255, 255, 255, 0.15); /* Слабый блик сверху */
+    --glass-text: #f8fafc; /* Белый текст */
+    --glass-input-bg: rgba(0, 0, 0, 0.2); /* Более темный фон для инпута */
+}
 
 body {
     margin: 0;

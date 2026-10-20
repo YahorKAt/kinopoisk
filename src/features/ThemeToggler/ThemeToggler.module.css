@@ -5,16 +5,24 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid var(--color-control-border);
-    background-color: var(--color-control-background);
-    color: var(--color-control-text);
     cursor: pointer;
-    transition: border-color .2s ease, color .2s ease, transform .2s ease;
+
+    background: var(--glass-bg);
+    color: var(--glass-text);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-top: 1px solid var(--glass-highlight);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
 }
 
 .themeButton:hover {
-    color: var(--color-indigo-400);
-    border-color: var(--color-indigo-400);
+    transform: scale(1.05);
+
+    background: rgba(var(--glass-bg), 0.12);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.25);
 }
 
 .themeButton svg {

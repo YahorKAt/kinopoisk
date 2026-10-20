@@ -1,75 +1,31 @@
-# React + TypeScript + Vite
+# 🎬 TMDB Movie Explorer (Kinopoisk Clone)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Современное веб-приложение для поиска и просмотра информации о фильмах. Проект представляет собой функциональный аналог Кинопоиска, построенный на базе данных The Movie Database (TMDB). Приложение отличается чистым UI/UX дизайном, поддержкой темной темы и высокой производительностью благодаря использованию современных инструментов React-экосистемы.
 
-Currently, two official plugins are available:
+## ✨ Основные возможности
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Главная страница**: Герой-баннер с актуальными новинками, подборки популярных, топовых и предстоящих фильмов.
+- **Умный поиск**: Мгновенный поиск фильмов по названию с пагинацией и очисткой результатов.
+- **Страница фильма**: Подробная информация о фильме, включая рейтинг, жанры, описание, актерский состав и похожие фильмы.
+- **Фильтрация и Категории**: Возможность просматривать фильмы по жанрам и фильтровать их по различным критериям.
+- **Избранное**: Сохранение любимых фильмов в локальное хранилище для быстрого доступа.
+- **Темная/Светлая тема**: Переключение между темами с сохранением выбора пользователя.
 
-## React Compiler
+##  Технологический стек
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend Core
+- **React 18+** — библиотека для построения пользовательских интерфейсов.
+- **TypeScript** — строгая типизация для надежности и масштабируемости кода.
+- **Vite** — быстрый сборщик проектов нового поколения.
 
-## Expanding the ESLint configuration
+### State Management & Data Fetching
+- **Redux Toolkit (RTK)** — управление глобальным состоянием приложения.
+- **RTK Query** — мощное решение для кэширования, синхронизации и обработки ошибок при работе с API.
+- **React Router v6** — клиентская маршрутизация.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Styling & UI
+- **CSS Modules** — изоляция стилей для каждого компонента.
+- **CSS Variables** — гибкая система темизации (светлая/темная тема).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+### API
+- **TMDB API** — получение данных о фильмах, актерах, рейтингах и постерах.
