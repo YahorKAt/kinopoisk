@@ -1,27 +1,49 @@
-import s from "./Search.module.css";
-import {useState} from "react";
-import * as React from "react";
+import { useSearchParams } from "react-router-dom"
+import s from "./Search.module.css"
+import { type ChangeEvent, type FormEvent, useEffect, useState } from "react"
 
-export const Search = () => {
-    const [searchQuery, setSearchQuery] = useState('');
+interface Props {
+    onSearch: (query: string) => void
+}
 
-    const handleSearch = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log('SearchIcon:', searchQuery);
-    };
+export const Search = ({ onSearch }: Props) => {
+    const [searchParams] = useSearchParams()
+    const urlQuery = searchParams.get("query") || ""
+
+    const [inputValue, setInputValue] = useState(urlQuery)
+
+    useEffect(() => {
+        setInputValue(urlQuery)
+    }, [urlQuery])
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault()
+        onSearch(inputValue.trim())
+    }
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value
+        setInputValue(newValue)
+
+        if (!newValue) {
+            onSearch("")
+        }
+    }
+
+    const isButtonDisabled = !inputValue.trim()
 
     return (
-        <form className={s.searchForm} onSubmit={handleSearch}>
+        <form className={s.searchForm} onSubmit={handleSubmit}>
             <input
                 type="search"
                 className={s.searchInput}
                 placeholder="Search for a movie"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={inputValue}
+                onChange={handleChange}
             />
-            <button type="submit" className={s.searchButton}>
+            <button type="submit" className={s.searchButton} disabled={isButtonDisabled}>
                 Search
             </button>
         </form>
-    );
-};
+    )
+}

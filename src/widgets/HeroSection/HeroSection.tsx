@@ -1,4 +1,6 @@
+import { Path } from "@/common/routing/paths"
 import { Search } from "@/features"
+import { useNavigate } from "react-router-dom"
 import s from "./HeroSection.module.css"
 
 type Props = {
@@ -8,6 +10,12 @@ type Props = {
 
 export const HeroSection = ({ backdrop_path, isLoading = false }: Props) => {
     const backdropUrl = backdrop_path ? `http://image.tmdb.org/t/p/original/${backdrop_path}` : ""
+
+    const navigate = useNavigate()
+
+    const handleSearch = (query: string) => {
+        navigate(`${Path.Search}?query=${query}`)
+    }
 
     return (
         <div className={s.hero} style={{ backgroundImage: !isLoading && backdropUrl ? `url(${backdropUrl})` : "none" }}>
@@ -23,7 +31,7 @@ export const HeroSection = ({ backdrop_path, isLoading = false }: Props) => {
                     <>
                         <h1 className={s.title}>Welcome</h1>
                         <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
-                        <Search />
+                        <Search onSearch={handleSearch} />
                     </>
                 )}
             </div>

@@ -1,6 +1,6 @@
 import { categoryLabels } from "@/common/constants"
 import { Path } from "@/common/routing/paths"
-import { useGetMoviesByCategoryQuery } from "@/entities/movie/api/moviesApi"
+import { useGetMoviesByCategoryQuery } from "@/entities/movie/api/movieApi"
 import { MovieCardSkeleton } from "@/entities/movie/ui"
 import { CategoryTabs, MoviesGrid, Pagination } from "@/widgets"
 import { useEffect, useState } from "react"

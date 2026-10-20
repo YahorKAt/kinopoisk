@@ -28,7 +28,7 @@
 }
 
 .searchButton {
-    display:  flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
@@ -50,4 +50,14 @@
 .searchButton:hover {
     background-color: var(--color-indigo-400);
     transform: scale(1.05);
+}
+
+.searchButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.searchButton:disabled:hover {
+    background-color: var(--color-blue-600);
+    transform: none;
 }

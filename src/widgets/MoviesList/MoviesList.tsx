@@ -1,4 +1,4 @@
-import type { Movie } from "@/entities/movie/api/moviesApi.types"
+import type { Movie } from "@/entities/movie/api/movieApi.types"
 import { MovieCard } from "@/entities/movie/ui"
 import s from "./MoviesList.module.css"
 

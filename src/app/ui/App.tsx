@@ -1,20 +1,37 @@
-import { useAppSelector } from "@/common/hooks"
+import { selectAppError, selectTheme, setAppErrorAC } from "@/app/model/app-slice"
+import { THEME } from "@/common/constants"
+import { useAppDispatch, useAppSelector } from "@/common/hooks"
 import { Routing } from "@/common/routing"
-import { selectThemeMode } from "@/entities/theme/model/themeSlice"
 import { useEffect } from "react"
-import { ToastContainer } from "react-toastify"
+import { toast, ToastContainer } from "react-toastify"
 
 export const App = () => {
-    const theme = useAppSelector(selectThemeMode)
+    const theme = useAppSelector(selectTheme)
+    const error = useAppSelector(selectAppError)
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
+        localStorage.setItem(THEME, theme)
         document.documentElement.setAttribute("data-theme", theme)
     }, [theme])
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error, {
+                onClose: () => dispatch(setAppErrorAC({ error: null })),
+            })
+        }
+    }, [error, dispatch])
 
     return (
         <>
             <Routing />
-            <ToastContainer position="bottom-left" theme={"colored"} />
+            <ToastContainer
+                position="bottom-left"
+                theme={theme === "dark" ? "dark" : "light"}
+                autoClose={5000}
+                pauseOnHover
+            />
         </>
     )
 }

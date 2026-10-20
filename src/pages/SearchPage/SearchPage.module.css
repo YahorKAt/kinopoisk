@@ -23,7 +23,31 @@
     color: var(--color-body-text);
 }
 
+.grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+}
+
 .subtitle {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.titleGrid{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    color: var(--color-body-text);
+}
+
+.empty{
     margin: 0;
     font-size: 16px;
     color: var(--color-gray-500);

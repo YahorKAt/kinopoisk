@@ -1,3 +1,4 @@
+import { THEME } from "@/common/constants"
 import type { RequestStatus } from "@/common/types"
 import { createAppSlice } from "@/common/utils"
 import { isFulfilled, isPending, isRejected } from "@reduxjs/toolkit"
@@ -7,12 +8,12 @@ export type ThemeMode = "dark" | "light"
 export const appSlice = createAppSlice({
     name: "app",
     initialState: {
-        themeMode: "light" as ThemeMode,
+        theme: (localStorage.getItem(THEME) as ThemeMode) || "dark",
         status: "idle" as RequestStatus,
         error: null as string | null,
     },
     selectors: {
-        selectThemeMode: (state) => state.themeMode,
+        selectTheme: (state) => state.theme,
         selectStatus: (state) => state.status,
         selectAppError: (state) => state.error,
     },
@@ -29,8 +30,8 @@ export const appSlice = createAppSlice({
             })
     },
     reducers: (create) => ({
-        changeThemeModeAC: create.reducer<{ themeMode: ThemeMode }>((state, action) => {
-            state.themeMode = action.payload.themeMode
+        changeThemeAC: create.reducer((state) => {
+            state.theme = state.theme === "light" ? "dark" : "light"
         }),
         setAppErrorAC: create.reducer<{ error: string | null }>((state, action) => {
             state.error = action.payload.error
@@ -39,5 +40,5 @@ export const appSlice = createAppSlice({
 })
 
 export const appReducer = appSlice.reducer
-export const { changeThemeModeAC, setAppErrorAC } = appSlice.actions
-export const { selectThemeMode, selectStatus, selectAppError } = appSlice.selectors
+export const { changeThemeAC, setAppErrorAC } = appSlice.actions
+export const { selectTheme, selectStatus, selectAppError } = appSlice.selectors

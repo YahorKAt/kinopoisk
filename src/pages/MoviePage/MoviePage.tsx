@@ -4,7 +4,7 @@ import {
     useGetMovieCreditsQuery,
     useGetMovieDetailsQuery,
     useGetSimilarMoviesQuery,
-} from "@/entities/movie/api/moviesApi"
+} from "@/entities/movie/api/movieApi"
 import { MoviesList } from "@/widgets"
 import { useParams, useNavigate } from "react-router-dom"
 import s from "./MoviePage.module.css"
@@ -13,12 +13,42 @@ export const MoviePage = () => {
     const { id } = useParams<{ id: string }>()
     const navigate = useNavigate()
 
-    const { data: movie, isLoading: isLoadingMovie } = useGetMovieDetailsQuery({ movie_id: Number(id) })
-    const { data: credits } = useGetMovieCreditsQuery({ movie_id: Number(id) })
-    const { data: similarMovies } = useGetSimilarMoviesQuery({ movie_id: Number(id) })
+    const movieId = Number(id)
+    const isValidId = !isNaN(movieId) && movieId > 0
 
-    if (isLoadingMovie) return <div className={s.loading}>Loading...</div>
-    if (!movie) return <div className={s.error}>Movie not found</div>
+    const {
+        data: movie,
+        isLoading: isLoadingMovie,
+        isError,
+    } = useGetMovieDetailsQuery({ movie_id: movieId }, { skip: !isValidId })
+    const { data: credits } = useGetMovieCreditsQuery({ movie_id: movieId }, { skip: !isValidId })
+    const { data: similarMovies } = useGetSimilarMoviesQuery({ movie_id: movieId }, { skip: !isValidId })
+
+    if (!isValidId) {
+        return (
+            <div className={s.error}>
+                <h2>Invalid movie ID</h2>
+                <button className={s.backButton} onClick={() => navigate(-1)}>
+                    <ArrowLeftIcon /> Go Back
+                </button>
+            </div>
+        )
+    }
+
+    if (isLoadingMovie) {
+        return <div className={s.loading}>Loading...</div>
+    }
+
+    if (isError || !movie) {
+        return (
+            <div className={s.error}>
+                <h2>Movie not found</h2>
+                <button className={s.backButton} onClick={() => navigate(-1)}>
+                    <ArrowLeftIcon /> Go Back
+                </button>
+            </div>
+        )
+    }
 
     const posterUrl = movie.poster_path ? `http://image.tmdb.org/t/p/w342${movie.poster_path}` : null
     const ratingColor = getRatingColorVar(movie.vote_average)

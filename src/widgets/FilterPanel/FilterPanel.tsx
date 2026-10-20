@@ -1,5 +1,5 @@
 import { RangeSlider } from "@/common/components/RangeSlider/RangeSlider"
-import { useGetGenreListQuery } from "@/entities/movie/api/moviesApi"
+import { useGetGenreListQuery } from "@/entities/movie/api/movieApi"
 import { useCallback } from "react"
 import s from "./FilterPanel.module.css"
 
@@ -32,7 +32,7 @@ type Props = {
 }
 
 export const FilterPanel = ({ filters, onFilterChange }: Props) => {
-    const { data } = useGetGenreListQuery({})
+    const { data } = useGetGenreListQuery()
 
     const handleGenreToggle = (genreId: number) => {
         const newGenres = filters.selectedGenres.includes(genreId)

@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from "@/common/components/Icons"
 import type { CategoryType } from "@/common/enums"
 import { Path } from "@/common/routing/paths"
-import { useGetMoviesByCategoryQuery } from "@/entities/movie/api/moviesApi"
+import { useGetMoviesByCategoryQuery } from "@/entities/movie/api/movieApi"
 import { MovieCardSkeleton } from "@/entities/movie/ui"
 import { MoviesList } from "@/widgets"
 import s from "./MoviesSection.module.css"

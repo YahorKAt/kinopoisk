@@ -1,5 +1,5 @@
 import { useDebounceValue } from "@/common/hooks"
-import { useGetFilteredMoviesQuery } from "@/entities/movie/api/moviesApi"
+import { useGetFilteredMoviesQuery } from "@/entities/movie/api/movieApi"
 import { MovieCardSkeleton } from "@/entities/movie/ui"
 import { FilterPanel, MoviesGrid, Pagination } from "@/widgets"
 import { useMemo } from "react"

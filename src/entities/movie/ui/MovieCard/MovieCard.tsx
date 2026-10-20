@@ -2,7 +2,7 @@ import { LikeIcon } from "@/common/components/Icons"
 import { useAppDispatch, useAppSelector } from "@/common/hooks"
 import { Path } from "@/common/routing/paths"
 import { getRatingColorVar } from "@/common/utils/rating"
-import { selectIsFavorite, toggleFavorite } from "@/entities/movie/model/movieSlice"
+import { selectIsFavorite, toggleFavorite } from "@/entities/movie/model/movie-slice"
 import { NavLink } from "react-router-dom"
 import s from "./MovieCard.module.css"
 

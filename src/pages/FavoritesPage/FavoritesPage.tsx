@@ -1,5 +1,5 @@
 import {useAppSelector} from "@/common/hooks";
-import {selectAllFavorites} from "@/entities/movie/model/movieSlice";
+import {selectAllFavorites} from "@/entities/movie/model/movie-slice";
 import { MovieCard } from "@/entities/movie/ui"
 import s from './FavoritesPage.module.css'
 
